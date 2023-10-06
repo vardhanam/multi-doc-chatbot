@@ -7,16 +7,16 @@ from langchain.embeddings import OpenAIEmbeddings
 import shutil
 
 # removing data from the earlier session
+
 if os.path.exists("./data"):
     shutil.rmtree("./data")
 
-os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
-# load the document as before
-loader = PyPDFLoader('./docs/RachelGreenCV.pdf')
-documents = loader.load()
+
+os.environ["OPENAI_API_KEY"] = "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"
 
 from langchain.document_loaders import Docx2txtLoader
 from langchain.document_loaders import TextLoader
+from langchain.document_loaders import UnstructuredEPubLoader
 
 
 documents = []
@@ -36,13 +36,13 @@ for file in os.listdir('docs'):
     elif file.endswith('.epub'):
         epub_path = './docs/' + file 
         loader =   UnstructuredEPubLoader(epub_path)
-        documents.extend(loader.load())    
+        documents.extend(loader.load())
 
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
 chunked_documents = text_splitter.split_documents(documents)
 
 # we create our vectorDB, using the OpenAIEmbeddings tranformer to create
-# embeddings from our text chunks. We set all the db information to be stored
+# embedding mugs from our text chunks. We set all the db information to be stored
 # inside the ./data directory, so it doesn't clutter up our source files
 vectordb = Chroma.from_documents(
   chunked_documents,
