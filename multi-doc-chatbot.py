@@ -1,3 +1,4 @@
+#pip install langchain pypdf openai chromadb tiktoken docx2txt unstructured
 import os
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
