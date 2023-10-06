@@ -1,5 +1,10 @@
 import os
 from langchain.document_loaders import PyPDFLoader
+import shutil
+
+# removing data from the earlier session
+if os.path.exists("./data"):
+    shutil.rmtree("./data")
 
 os.environ["OPENAI_API_KEY"] = "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"
 pdf_loader = PyPDFLoader('./docs/RachelGreenCV.pdf')
