@@ -4,7 +4,10 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
+import shutil
 
+# removing data from the earlier session
+shutil.rmtree("./data")
 
 os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
 # load the document as before
