@@ -9,7 +9,7 @@ import shutil
 if os.path.exists("./data"):
     shutil.rmtree("./data")
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
 # load the document as before
 loader = PyPDFLoader('./docs/RachelGreenCV.pdf')
 documents = loader.load()
