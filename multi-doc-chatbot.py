@@ -7,7 +7,8 @@ from langchain.embeddings import OpenAIEmbeddings
 import shutil
 
 # removing data from the earlier session
-shutil.rmtree("./data")
+if os.path.exists("./data"):
+    shutil.rmtree("./data")
 
 os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
 # load the document as before
