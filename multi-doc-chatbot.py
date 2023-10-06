@@ -28,6 +28,10 @@ for file in os.listdir('docs'):
         text_path = './docs/' + file
         loader = TextLoader(text_path)
         documents.extend(loader.load())
+    elif file.endswith('.epub'):
+        epub_path = './docs/' + file 
+        loader =   UnstructuredEPubLoader(epub_path)
+        documents.extend(loader.load())    
 
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
 chunked_documents = text_splitter.split_documents(documents)
