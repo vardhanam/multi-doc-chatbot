@@ -3,6 +3,11 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
+import shutil
+
+# delete data folder if it exists
+if os.path.exists("./data"):
+    shutil.rmtree("./data")
 
 os.environ["OPENAI_API_KEY"] = "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"
 # load the document as before
