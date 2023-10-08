@@ -1,6 +1,5 @@
 #pip install langchain pypdf openai chromadb tiktoken docx2txt unstructured 
 import os
-from langchain.document_loaders import UnstructuredPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
@@ -12,45 +11,19 @@ if os.path.exists("./data"):
     shutil.rmtree("./data")
 
 
-os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
+os.environ["OPENAI_API_KEY"] = "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"
 
-from langchain.document_loaders import Docx2txtLoader
-from langchain.document_loaders import TextLoader
 from langchain.document_loaders import UnstructuredEPubLoader
 
-import aspose.words as aw
 
 # Call the function to extract text from the PDF
 
 
-
 documents = []
 for file in os.listdir('docs'):
-    if file.endswith('.pdf'):
-        pdf_path = './docs/' + file
-        epub_pdf = aw.Document(pdf_path)
-        epub_pdf.save("temp_pdf.epub")
-        loader = UnstructuredEPubLoader("temp_pdf.epub")
-        documents.extend(loader.load())
-        os.remove("temp_pdf.epub")
-    elif file.endswith('.docx') or file.endswith('.doc'):
-        doc_path = './docs/' + file
-        epub_doc = aw.Document(doc_path)
-        epub_doc.save("temp_doc.epub")
-        loader = UnstructuredEPubLoader("temp_doc.epub")
-        documents.extend(loader.load())
-        os.remove("temp_doc.epub")
-    elif file.endswith('.txt'):
-        text_path = './docs/' + file
-        epub_text = aw.Document(text_path)
-        epub_text.save("temp_text.epub")
-        loader = UnstructuredEPubLoader("temp_text.epub")
-        documents.extend(loader.load())
-        os.remove("temp_text.epub")
-    elif file.endswith('.epub'):
-        epub_path = './docs/' + file 
-        loader =   UnstructuredEPubLoader(epub_path)
-        documents.extend(loader.load())
+    epub_path = './docs/' + file 
+    loader =   UnstructuredEPubLoader(epub_path)
+    documents.extend(loader.load())
 
 
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
